@@ -129,26 +129,25 @@ namespace Database {
     
     class MyDataBase {
     private:
+        // maps the table name to a table
         unordered_map <char*,Table*> DB;
-        
-        
     public:
         
         MyDataBase();
         
         ~MyDataBase();
         
-        bool add_table(Table* table, char* table_name);
+        void add_table(Table* table, char* table_name);
         
         void drop_table(char* table_name);
         
-        std::string list_table();
+        vector<string> list_table();
         
-        std::vector < std::vector<std::string>> get_table();
+        Table* get_table(char *table_name);
         
         // query function
         
-        Table query(std::string SELECT, std::string FROM, std::string WHERE);
+        Table query(string SELECT, string FROM, string WHERE);
         
     };
 }
