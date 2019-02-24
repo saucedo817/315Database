@@ -40,6 +40,11 @@ namespace Database {
         
         int numColumn;
         
+        std::vector<std::vector<std::string> > tableData;
+    
+        // Vector for storing attribute names 
+        
+        std::vector<std::string> attributeList;
         
         
     public:
@@ -58,31 +63,31 @@ namespace Database {
         
         // An add function that takes in a single attribute name, and adds a column to the end of the table with that new attribute. Any entries currently in the table should get NULL for that entry.
         
-        void addAttribute(std::string attribute);
+        void addAttribute(Table* table, std::string attribute);
         
         
         
         // A delete function that takes an attribute name and deletes it from the table.
         
-        void deleteAttribute(std::string attribute);
+        void deleteAttribute(Table* table, std::string attribute);
         
         
         
         // An insert command that takes a record and adds it to the table.
         
-        void insertRecord(std::string record);
+        void insertRecord(Table* table, std::vector<std::string> records);
         
         
         
         // A get attributes command that returns a list of the attributes for that table, in order
         
-        std::string getAttributes(std::string tableName);
+        std::string getAttributes(Table* tableName);
         
         
         
         // A get size command that returns the number of records in the table
         
-        int getSize(std::string tableName);
+        int getSize(Table* tableName);
         
         
         
