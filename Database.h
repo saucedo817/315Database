@@ -11,6 +11,9 @@ using namespace std;
 namespace Database {
     
     class MyRecord {
+    private:
+        // vector for the record's contents.
+        vector<string> records;
         
     public:
         
