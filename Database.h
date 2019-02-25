@@ -113,7 +113,7 @@ namespace Database {
         
         // A natural join command as follows: Two tables are taken as input, and one is produced as output. The first table should have an attribute name(s) matching the key from the second table. The join should create one entry for each row of the first table, with the additional columns from the matching key in the second table. If the second table does not have a key, or the first table does not have an attribute matching the key name, then an exception can be thrown, or an error returned.
         
-        Table naturalJoin(Table a, Table b)
+        Table naturalJoin(Table a, Table b);
         
         
         
