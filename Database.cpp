@@ -44,9 +44,11 @@ namespace Database {
     int MyRecord::returnSize() {
         return records.size();
     }
-    
-    
-    
+
+    MyRecord::string& operator[](std::size_t idx){ 
+        return mVector[idx]; 
+    }
+
     // table functions
     Database::Table::Table (){
         numRow = 0;
@@ -109,8 +111,97 @@ namespace Database {
         return tableName->numRow;
     }
     
+    int getRecord(std::string record, std::vector<std::string> records){
+        for(int i = 0; i<records.size(); ++i){  //iterate through records to find matching key and return index
+            if(records.at(i) == record){
+                return i;
+            }
+        }
+        return -1; //-1 to signal not found
+    }
     
+    void makeKey(Table* tableIn, std::string keyName){
+        int index;
+        vector<std::string> attrString;
+        for ( int i = 0; i < tableName->attributeList.size(); i++){
+            if(tableName->attributeList[i] == keyName){
+                index = i;
+            }
+        }
+        for(int i = 0; i<numRow; ++i){
+            attrString.push_back(tableIn.at(i).at(index));
+        }
+        std::sort(attrString.begin(), attrString.end());
+        auto temp = attrString.end();
+        std::unique(attrString.begin(), attrString.end());
+        if(attrString.end() != temp){
+            //throw error, not a unique attribute
+        }
+        else{
+            //if eligible, can just return
+        }
+    }
     
+    std::vector<std::vector<std::string>> crossJoin(std::vector<std::vector<std::string>> table1, std::vector<std::vector<std::string>> table2){
+        int addSize = table2.numRow;
+        for (int i = 0; i < addSize; i++){
+            insertRecord(table1, table2.at(i));
+        }
+        //delete table 2
+    }
+
+    std::vector<std::vector<std::string>> naturalJoin(std::vector<std::vector<std::string>> table1, std::vector<std::vector<std::string>> table2){
+
+    }
     
+    int count(Table* tableName, std::string attribute){
+        int index;
+        int counter;
+        for (int i = 0; i < attributeList.size(); i++){
+            if (attributeList[i] == attribute){
+                int index = i;
+            }
+        }
+        for(int i = 0; i < numRow; ++i){
+            if(tableName.at(index).at(i) != NULL){
+                counter++;
+            }
+        }
+        return counter;
+    }
     
+    int min(Table* tableName, std::string attribute){
+        int index;
+        int counter;
+        int min = MAX_NUM;
+        for (int i = 0; i < attributeList.size(); i++){
+            if (attributeList[i] == attribute){
+                int index = i;
+            }
+        }
+        for(int i = 0; i < numRow; ++i){
+            if(tableName.at(index).at(i) < min){
+                min = tableName.at(index).at(i);
+            }
+        }
+        return min;
+    }
+    
+    int max(std::string attribute){
+        int index;
+        int counter;
+        int max = MIN_NUM;
+        for (int i = 0; i < attributeList.size(); i++){
+            if (attributeList[i] == attribute){
+                int index = i;
+            }
+        }
+        for(int i = 0; i < numRow; ++i){
+            if(tableName.at(index).at(i) > max){
+                max = tableName.at(index).at(i);
+            }
+        }
+        return max;        
+        
+    }    
 }
