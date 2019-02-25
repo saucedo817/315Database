@@ -19,9 +19,8 @@ namespace Database {
     }
     
     vector<string> MyDataBase::list_table(){
-        vector<string> tables;
         
-        for(auto it = DB.begin(); it != DB.end(); it++){
+        for(auto it = DB.begin(); it != DB.end(); it++) {
             tables.push_back(it->first);
         }
         return tables;
@@ -33,23 +32,23 @@ namespace Database {
     
     // query function
     
-    Table MyDataBase::query(std::string SELECT, std::string FROM, std::string WHERE){
-        
-    }
+    //Table MyDataBase::query(std::string SELECT, std::string FROM, std::string WHERE){
+    
+    //  }
     
     // record functions
-    MyRecord::MyRecord(int size);
+    MyRecord::MyRecord(int size) {
         records[size];
     }
-
-    int MyRecord::returnSize();
+    
+    int MyRecord::returnSize() {
         return records.size();
     }
-
-
+    
+    
     
     // table functions
-    Table::Table (){
+    Database::Table::Table (){
         numRow = 0;
         numColumn = 0;
     }
@@ -111,7 +110,7 @@ namespace Database {
     }
     
     
-
+    
     
     
 }
