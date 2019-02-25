@@ -146,13 +146,67 @@ namespace Database {
         int addSize = table2.numRow;
         for (int i = 0; i < addSize; i++){
             insertRecord(table1, table2.at(i));
+            numRow++;
         }
         //delete table 2
     }
 
-    std::vector<std::vector<std::string>> naturalJoin(std::vector<std::vector<std::string>> table1, std::vector<std::vector<std::string>> table2){
+    Table naturalJoin(Table a, Table b) {
+		Table c;
+		a_Att = a.getAttributes();
+		b_Att = b.getAttributes();
+		a_Rec = a.records;
+		b_Rec = b.records;
+		if (b.key.size() == 0) {
+			cout << "no key set";
+			return c;
+		}
+		for (int i = 0; i < b.key.size(); i++) {
+			if (find(a_Att.begin(), a_Att.end(), b.key[i]) == a_Att.end()) {
+				cout << "key does not perfectly match attributes in other table";
+				return c;
+			}
+		}
+		vector<string> temp; //temp vector for key record entries
+		for (int i = 0; i < b.key.size(); i++) { //search for key in table A
+			for (int j = 0; j < a_Att.size(); j++) {
+				if (b.key[i] == a_Att[j]) {
+					int recordNumber = a.countRecords(b.key[i]);
+					for (int x = 0; x < recordNumber; x++) {
+						temp.push_back(a_Rec[x][j]);
+					}
+				}
+			}
+		}
+		for (int i = 0; i < b.key.size(); i++) { //searching in b and adding to a at correct spot
+			for (int j = 0; j < b_Att.size(); j++) {
+				if (b.key[i] == b_Att[j]) {
+					int recordNumber = b.countRecords(b.key[i]);
+					for (int x = 0; x < recordNumber; x++) {
+						for (int n = 0; n < temp.size(); n++) {
+							if (b_Rec[x][j] == temp[n]) {
+								for (int y = 0; y < b_Att.size(); y++) {
+									if (y != j) {
+										a_Rec[n]push_back(b_Rec[x][y]);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 
-    }
+		for (int i = 0; i < b.key.size(); i++) { //add non-key attributes to table
+			for (int j = 0; j < b_Att.size(); j++) {
+				if (b.key[i] != b_Att[j]) {
+					a.addAttribute(b_Att[j]);
+				}
+			}
+		}
+		return a;
+	}
+
     
     int count(Table* tableName, std::string attribute){
         int index;
