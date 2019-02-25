@@ -241,7 +241,7 @@ namespace Database {
         return min;
     }
     
-    int max(std::string attribute){
+    int max(Table* tableName, std::string attribute){
         int index;
         int counter;
         int max = MIN_NUM;
