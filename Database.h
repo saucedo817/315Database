@@ -95,13 +95,13 @@ namespace Database {
         
         // This will use a for loop to iterate through the table and return the location of the wanted record
         
-        int getRecord(std::string record);
+        int getRecord(std::string record, std::vector<std::string> records);
         
         
         
         // A function that allows a single attribute name to be designated as a key for the table.
         
-        void makeKey(std::string keyName);
+        void makeKey(Table* tableIn, std::string keyName);
         
         
         
@@ -113,25 +113,25 @@ namespace Database {
         
         // A natural join command as follows: Two tables are taken as input, and one is produced as output. The first table should have an attribute name(s) matching the key from the second table. The join should create one entry for each row of the first table, with the additional columns from the matching key in the second table. If the second table does not have a key, or the first table does not have an attribute matching the key name, then an exception can be thrown, or an error returned.
         
-        std::vector<std::vector<std::string>> naturalJoin(std::vector<std::vector<std::string>> table1, std::vector<std::vector<std::string>> table2);
+        Table naturalJoin(Table a, Table b)
         
         
         
         // Routines that take a single attribute name as input, and compute the count
         
-        int count(std::string attribute);
+        int count(Table* tableName, std::string attribute);
         
         
         
         // Routines that take a single attribute name as input, and compute the min
         
-        int min(std::string attribute);
+        int min(Table* tableName, std::string attribute);
         
         
         
         // Routines that take a single attribute name as input, and compute the max
         
-        int max(std::string attribute);
+        int max(Table* tableName, std::string attribute);
         
     };
     
